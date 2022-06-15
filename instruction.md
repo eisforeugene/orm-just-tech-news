@@ -5,3 +5,6 @@ inside db create schema.sql to create a structure that tells the possible ways i
 create database connection inside config, connection.js
 set up environment variables, create .env after installing dotenv
 load env variables into connection
+create user.js inside models
+define several columns for the Model
+create index.js in models folder
