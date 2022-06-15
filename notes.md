@@ -7,8 +7,12 @@ sequelize takes a object-oriented JS concept and applies them to how we setup th
 model class: is what we create our own models from using the extends keyword so User inherits all of the functionality of the Model class has
 once User class is created, we use .init() method to initialize the model's data and configuration, passing in 2 objects as arguments. 1st = columns & datatypes for those columns. 2nd = object it accepts configures certain options for the table
 
+Every time we extend a class from the Sequelize Model class, that new class(or model) inherits a number of methods for creating, reading, updating and deleting data from the database. .init() method we execute after is the part that actually provides context as to how those inherited methods should work
+
 object relational mapping: is a technique that allows us to query and manipulate data that is stored in a relational db without writing sql queries
 - use object-oriented approach by taking advantage of methods provided by the ORM
 Advantages: easy to test, support for syncing db, validates data and can restrict to specifc form, complex sql queries can be used using relatively simple JS syntax
 
 schema: represents any structure that we're defining around the data: tables, views, fields, packages, etc 
+
+REST, Representational State Transfer. 
