@@ -3,7 +3,12 @@ const sequelize = require('../config/connection'); // import the connection to s
 const bcrypt = require('bcrypt');
 
 // create our User model
-class User extends Model { } // inherits all functionality of the Model class (extends) 
+class User extends Model {  // inherits all functionality of the Model class (extends) 
+    // set up method to run on instance data (per user) to check password
+    checkPassword(loginPw) { // takes in plaintext pw retrieved from the client request at req.body.email and compares to hashed pw
+        return bcrypt.compareSync(loginPw, this.password); //this allows access to this user's properties including pw which was stored in a hashed string
+    }
+ }
 
 // define table columns and configuration
 User.init(

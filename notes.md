@@ -19,3 +19,7 @@ REST, Representational State Transfer.
 
 hooks are functions that are called before or after calls in Sequelize
 
+why use post instead of get for the login process? get method carries the req parameters appended in the URL string, whereas a post method carries the req parameters in req.body, which makes it a more secure way of transferring data 
+
+what is instance method in objected oriented programming? returns or makes use of information (properties) specific to that particular object
+    objects generated from classes are instances of the class

@@ -50,6 +50,33 @@ router.post('/', (req, res) => {
         });
 });
 
+// login route 
+router.post('/login', (req, res) => {
+    // expects {username: 'Lerantino', email: 'lerantino@gmail.com', password: 'password1234'}
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user with that email address!' });
+            return;
+        }
+        // verify user 
+        // if query result is successsful,  we can call .checkPassword(), which will be on the dbUserData object. We'll need to pass the plaintext pw, which is stored in req.body.pw, into .checkPassword() as the argument
+
+        const validPassword = dbUserData.checkPassword(req.body.password);
+
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect password' });
+            return;
+        }
+
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+    // Query operation
+});
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
     // expects {username: 'Lerantino', email: 'lerantino@gmail.com', password: 'password1234'}
