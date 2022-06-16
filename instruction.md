@@ -17,3 +17,6 @@ install bcrypt and incorporate it into the user model to hash password
 hash password after updating the password in User
 create login route for authentication using using a post route
     compare and verify the hashed pw with an instance method on the user model definition
+created the post model inside models
+define model associations
+    create associations inside index.js inside models
