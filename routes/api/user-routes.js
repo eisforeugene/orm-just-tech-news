@@ -56,6 +56,7 @@ router.put('/:id', (req, res) => {
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, { // combines looking up and creating data || UPDATE users SET username = 'Lerantino', email = 'lerantino@gmail.com', password = 'newPassword1234' WHERE id = 1
+        individualHooks: true, // add option to the query call
         where: {
             id: req.params.id
         }

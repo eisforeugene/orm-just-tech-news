@@ -16,3 +16,6 @@ Advantages: easy to test, support for syncing db, validates data and can restric
 schema: represents any structure that we're defining around the data: tables, views, fields, packages, etc 
 
 REST, Representational State Transfer. 
+
+hooks are functions that are called before or after calls in Sequelize
+

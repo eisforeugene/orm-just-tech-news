@@ -13,3 +13,5 @@ implement crud actions
 hook up the server // consolidate all routes
 setup server.js
 protect passwords in user-routes.js
+install bcrypt and incorporate it into the user model to hash password
+hash password after updating the password in User

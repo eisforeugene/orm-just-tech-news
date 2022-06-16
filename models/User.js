@@ -1,8 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection'); // import the connection to sql through sequelize
+const bcrypt = require('bcrypt');
 
 // create our User model
-class User extends Model {} // inherits all functionality of the Model class (extends) 
+class User extends Model { } // inherits all functionality of the Model class (extends) 
 
 // define table columns and configuration
 User.init(
@@ -37,17 +38,33 @@ User.init(
         },
         // define a password column
         password: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING, 
             allowNull: false,
             validate: {
                 // this means the pw must be at least 4 characters long
                 len: [4]
             }
-        }
+        },
     },
     {
         // TABLE CONFIGURATION OPTIONS GO HERE
+        hooks: { // hook will be fired just before a new instance of User is created.
+            // set up beforeCreate lifecycle 'hook' functionality
+            async beforeCreate(newUserData) { // execute bcrypt hash function on plaintext password
 
+                // pass userData obj that contains pw in the password property, saltRound = 10
+                // hashed pw is then passed to the promise object newUserData obj with a hashed pw property.
+                newUserData.password = await bcrypt.hash(newUserData.password, 10)
+                // the return statement then exits out of the function returning the hashed password in the newUserData
+                return newUserData;
+            },
+            // set up beforeUpdate lifecycle 'hook' functionality // add an option to the query call in user-routes.js 
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10)
+
+                return updatedUserData;
+            }
+        },
         // pass in our imported sequelize connection (the direct connection to our db)
         sequelize,
         // don't automatically create createdAt/updatedAt timestamp fields
