@@ -25,3 +25,5 @@ what is instance method in objected oriented programming? returns or makes use o
     objects generated from classes are instances of the class
 
 catch usually deals with rejected cases only
+
+through table: creating another table for the sole purpose of connecting the data between two other tables with their primary keys

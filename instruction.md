@@ -24,3 +24,7 @@ create api routes for the post model
     get all posts
     create a single post
     create a post
+    update post
+    delete post
+create vote model
+    

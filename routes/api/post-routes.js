@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection')
 
-const { Post, User } = require('../../models'); // import both since the tables relate to one another
+const { Post, User, Vote } = require('../../models'); // import both since the tables relate to one another
 
 // get all users
 
@@ -61,6 +62,40 @@ router.post('/', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+// PUT /api/posts/upvote
+// place before PUT route because express.js will think the word upvote is a valid paramter for /:id
+router.put('/upvote', (req, res) => {
+    Vote.create({
+        user_id: req.body.user_id,
+        post_id: req.body.post_id
+    })
+    // find the post we just voted on
+    .then(() => {
+        return Post.findOne({
+            where: {
+                id: req.body.post_id
+            },
+            attributes: [
+                'id',
+                'post_url',
+                'title',
+                'created_at',
+                // use raw mySQL aggregate function query to get a count of how many votes the post has and return it under the name 'vote_count'
+                [
+                    // allows us to run regular SQL queries from within the sequelize method-based queries
+                    sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'),
+                    'vote_count'
+                ]
+            ]
+        })
+    })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
 });
 
 router.put('/:id', (req, res) => {
