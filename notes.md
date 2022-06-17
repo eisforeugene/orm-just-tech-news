@@ -23,3 +23,5 @@ why use post instead of get for the login process? get method carries the req pa
 
 what is instance method in objected oriented programming? returns or makes use of information (properties) specific to that particular object
     objects generated from classes are instances of the class
+
+catch usually deals with rejected cases only

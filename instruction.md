@@ -20,3 +20,7 @@ create login route for authentication using using a post route
 created the post model inside models
 define model associations
     create associations inside index.js inside models
+create api routes for the post model
+    get all posts
+    create a single post
+    create a post
